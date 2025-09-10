@@ -1,0 +1,40 @@
+.notiEditWrap{
+    padding: 30px 32px 32px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+}
+.notiEditBox{
+    margin-bottom: 17px;
+}
+.notiEditBox:first-child{
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+}
+.notiEditBox>h2{
+    text-align: center;
+}
+.editTit{
+    margin-bottom: 17px;
+    font-weight: 700;
+}
+.editTit, .notiEditBox>textarea{
+    display: block;
+}
+.editBox{
+    width: 100%;
+    padding: 17px 25px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Noto Sans KR", sans-serif;
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+    background-color: var(--color-white);
+}
+.notiEditBox>textarea{
+    height: 434px;
+}
+.noticeBtn>a{
+    display: block;
+}

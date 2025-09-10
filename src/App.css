@@ -1,0 +1,270 @@
+@font-face {
+	font-family: 'BookkBold';
+	src: url('/bandifesta/fonts/bookkmyeongjobold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'BookkThin';
+	src: url('/bandifesta/fonts/bookkmyeongjothin.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'PyeongChang';
+	src: url('/bandifesta/fonts/PyeongChangPeace-Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/bandifesta/fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
+}
+
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+	font-family: 'NotoSans';
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:visited {
+	color: inherit;
+}
+
+a:active {
+	color: inherit;
+}
+
+ul,ol,li {
+	list-style: none;
+}
+
+:root {
+	/*색상*/
+	--color-main: #050819;
+	--color-black: #222222;
+	--color-white: #F8F8F8;
+	--color-sub: #FDD745;
+	--color-red: #EC1C24;
+
+	/* notice 색상 정리 */
+	--tit-border-color : #666;
+	--txt-border-color : #ccc;
+	--list-hover-color : #f8f8f8;
+		/* text color : color-black */
+	--tit-weight : 700;		/* detail page 제목 700*/
+	--txt-weight : 500;		/* detail page 분류 500*/
+	--list-padding : 18px 25px;
+	/* --tit-font-size : 16px;   클래스명 있음, detail 페이지 내용들 전부 16*/ 
+	--txt-font-size : 15px;
+	--small-font-size : 12px;
+	--detail-tit-font : 24px;
+
+	--notice-padding : 23px;
+	--notice-gap : 18px;
+	--box-shadow-in : rgba(0, 0, 0, 0.15) 2px 2px 2px inset;
+	--box-shadow-out : rgba(0, 0, 0, 0.25) 2px 2px 2px;
+
+
+		/* tit font :  class명 fontMain*/
+	@media screen and (max-width:1439px) {
+		--txt-font-size : 14px;
+		--detail-tit-font : 20px;
+		--notice-padding : 13px;
+		--notice-gap : 15px;
+		--small-font-size : 11px;
+	}
+	@media screen and (max-width:1023px) {
+		--txt-font-size : calc( 100vw * (12 / 400));
+		--detail-tit-font : calc( 100vw * (18 / 400));
+		--notice-padding : calc( 100vw * (10 / 400));
+		--notice-gap : calc( 100vw * (10 / 400));
+		--small-font-size : calc( 100vw * (20 / 400));
+	}
+
+	/*여백*/
+		--footer-img-height: calc((100vw * (238 / 1920)));
+		--main-padding-aside: 20px;
+		--main-padding-top: 50px;
+		--main-padding-bottom: calc(10px + var(--footer-img-height));
+		--header-height: 100px;
+		--header-padding: 0 32px;
+		@media screen and (max-width:1439px) {
+			/* --footer-img-height: 320px; */
+			--main-padding-aside: 30px;
+			--main-padding-top: 30px;
+			--main-padding-bottom: calc(10px + var(--footer-img-height));
+			--header-padding: 0 16px;
+		}
+		@media screen and (max-width:1023px) {
+			/* --footer-img-height: calc( 100vw * (320 / 400)); */
+			--main-padding-aside: calc( 100vw * (20 / 400));
+			--main-padding-top: calc( 100vw * (20 / 400));
+			--main-padding-bottom: calc( 100vw * (40 / 400) + var(--footer-img-height));
+			--header-height: calc(100vw * (64 / 400));
+			--header-padding: 0 calc(100vw * (16 / 400));
+		}
+}
+
+/*내부박스*/
+.innerbox {
+	width:1440px;
+	margin: 0 auto;
+	@media screen and (max-width:1439px) {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+/*대제목폰트*/
+.fontTitle {
+	font-size: 32px;
+	@media screen and (max-width:1439px) {
+		font-size: 24px;
+	}
+	@media screen and (max-width:1023px) {
+		font-size: calc( 100vw * (20 / 400));
+	}
+}
+
+/*소제목폰트*/
+.fontSubTitle {
+	font-size: 20px;
+	@media screen and (max-width:1439px) {
+		font-size: 18px;
+	}
+	@media screen and (max-width:1023px) {
+		font-size: calc( 100vw * (16 / 400));
+	}
+}
+
+/*본문폰트*/
+.fontMain {
+	font-size: 16px;
+	@media screen and (max-width:1439px) {
+		font-size: 14px;
+	}
+	@media screen and (max-width:1023px) {
+		font-size: calc( 100vw * (12 / 400));
+	}
+}
+
+/*메인 컨테이너*/
+.mainContent {
+	padding-left: var(--main-padding-aside);
+	padding-right: var(--main-padding-aside);
+	padding-top: var(--main-padding-top);
+	padding-bottom: var(--main-padding-bottom);
+	min-height: 960px;
+}
+
+/*좌우분할*/
+.tabContentDivision {
+	display: flex;
+	gap: 50px;
+	@media screen and (max-width:1439px) {
+		gap: 50px;
+	}
+	@media screen and (max-width:1023px) {
+		gap: 0px;
+		flex-direction: column;
+	}
+}
+
+/*상하분할*/
+.tabContentDivisionAlter {
+	display: flex;
+	flex-direction: column;
+}
+
+/*플렉스*/
+.flex {
+	display:flex;
+}
+
+/*섀도우박스*/
+.shadowBox {
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+	@media screen and (max-width:1023px) {
+		border-radius: calc( 100vw * (8 / 400));
+	}
+}
+
+/* 공용버튼 */
+
+
+
+
+/* notice / my */
+/* 버튼 상위 div */
+.btnWrap{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-top: var(--notice-padding);
+}
+.btnWrap>div{
+    display: inline-block;
+}
+
+/* 페이지네이션 */
+.subNoticeNavi{
+    display: flex; gap: 12px;
+    justify-content: center;
+	align-items: center;
+	padding-top: var(--notice-padding);
+}
+.subNoticePageNext, .subNoticePagePrev{
+	display: block;
+	cursor: pointer;
+	width: 25px; height: 25px;
+	margin: 0 3px;
+}
+.subNoticeNavi img{
+    width: 100%;
+}
+.subNoticePage{
+	display: block;
+	cursor: pointer;
+	/* padding: 4px 11px; */
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	color: var(--tit-border-color);
+	background-color: var(--color-white);
+	text-align: center;
+}
+.subNoticePage>a{
+	display: block;
+	padding: 4px 11px;
+}
+.subNoticePageActive{
+    color: var(--color-white);
+    background-color: var(--color-main);
+}
+.subNoticePageActive>a{
+	display: block;
+	padding: 4px 11px;
+}
+@media screen and (max-width:1439px) {
+	.subNoticeNavi{
+		gap: 10px;
+	}
+}
+@media screen and (max-width:1023px) {
+	.subNoticePage>a{
+		padding: 5px 10px;
+	}
+	.subNoticePageActive>a{
+		padding: 5px 10px;
+	}
+}

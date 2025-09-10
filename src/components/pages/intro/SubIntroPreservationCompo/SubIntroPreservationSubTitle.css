@@ -1,0 +1,26 @@
+.SubIntroPreservationSubTitle{
+    align-items: center;
+    gap : 10px;
+}
+.SubIntroPreservationSubTitle>div{
+    height: 41px;
+    padding : 3px 0 ;
+    align-items: center;
+    justify-content: center;
+
+}
+.SubIntroPreservationSubTitle h5{
+    font-size: 20px;
+    font-family: 'BookkBold';
+    font-weight: 400;
+	
+}
+.SubIntroPreservationSubTitle>div>img{
+    @media screen and (max-width:1023px) {
+		width:  calc(100vw * ( 20 / 400 ));
+	}
+}
+@media screen and (max-width:1023px) {
+    .SubIntroPreservation_sec1_wrap .SubIntroPreservationSubTitle>h5{
+    font-size: calc(100vw * ( 18 / 400 ));}
+}

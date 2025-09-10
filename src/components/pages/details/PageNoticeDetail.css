@@ -1,0 +1,42 @@
+.noticeDetail>h2{
+    padding: 30px 0;
+    text-align: center;
+    font-size: var(--detail-tit-font);
+    border-top: 2px solid var(--color-black);
+    border-bottom: 2px solid var(--color-black);
+}
+.noticeDetail>div{
+    border-top: 1px solid #ccc;
+    display: flex;
+}
+.noticeDetail>div:nth-child(3){
+    border-bottom: 1px solid #ccc;
+}
+.noticeDetail>div>div{
+    padding: 10px 8px;
+}
+.detailTit{
+    width: 15%;
+    font-weight: 500;
+    border-right: 1px solid #ccc;
+}
+.detailBox{
+    width: 85%;
+}
+.noticeDetail>p{
+    padding: 40px 24px;
+    border-bottom: 1px solid var(--color-main);
+    white-space: pre-wrap;
+}
+.noticeDetail>textarea{
+    width: 100%;
+    padding: 40px 24px;
+    border: none;
+    border-bottom: 1px solid var(--color-main);
+}
+.noticeBtn{
+    display: flex;
+    margin: 23px 0;
+    gap: 10px;
+    justify-content: right;
+}

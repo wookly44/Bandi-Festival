@@ -1,0 +1,157 @@
+.headerDummy {
+	position: relative;
+	width: 100%;
+	height: var(--header-height);
+	background-color: var(--color-main);
+}
+
+header {
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: var(--header-height);
+	background-color: var(--color-main);
+	z-index: 32768;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--header-padding);
+	transition: transform 0.25s;
+}
+
+header.hidden.alter {
+	transform: translateY(-100%);
+}
+
+.headerLogo {
+	font-size:0;
+}
+
+.headerLogo>img {
+	width:144px;
+	height: auto;
+	@media screen and (max-width:1439px) {
+		width: 128px;
+	}
+	@media screen and (max-width:1023px) {
+		width: calc(100vw * (80 / 400));
+	}
+}
+
+.headerMiddleNav {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	gap: 60px;
+	@media screen and (max-width:1439px) {
+		gap: 30px;
+	}
+	@media screen and (max-width:1023px) {
+		display: none;
+	}
+}
+
+.headerMiddleNav .navItem {
+	/* font-weight: bold; */
+	color: var(--color-white);
+	transition: 0.25s;
+	width: 130px;
+	text-align: center;
+}
+
+.headerMiddleNav .navItem:hover {
+	/* font-weight: bold; */
+	color: var(--color-sub);
+}
+
+.headerMiddleNav .navItem.active {
+	color: var(--color-sub);
+}
+
+.headerMiddleNav .navItem.active:hover {
+	filter: drop-shadow(0 0 2px var(--color-sub));
+}
+
+.headerContext {
+	width: 144px;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+	@media screen and (max-width:1439px) {
+		width: 128px;
+	}
+	@media screen and (max-width:1023px) {
+		width: calc(100vw * (40 / 400));
+		height: calc(100vw * (40 / 400));
+	}
+}
+
+.languageSelector {
+	color: var(--color-white);
+	font-weight: bold;
+	position: relative;
+	@media screen and (max-width:1023px) {
+		display: none;
+	}
+}
+
+.languageSelector .contentAndArrow {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	user-select: none;
+	height: 100%;
+	padding: 16px 8px;
+}
+
+.languageSelector .arrow {
+	width: 16px;
+	aspect-ratio: 1;
+	background-image: url('/bandifesta/assets/arrowWhite.png');
+	background-size: 100%;
+	transform: rotate(90deg);
+	transition: 0.25s;
+}
+
+.languageSelector .content {
+	height: 100%;
+}
+
+.languageSelector .arrow.active {
+	transform: rotate(-90deg);
+}
+
+.languageSelector .dropDown {
+	background-color: var(--color-main);
+	z-index: 8192;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	/* height: 0; */
+}
+
+.languageSelector .dropDownItem{
+	user-select: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: initial;
+	padding: 4px 16px;
+	transition: 0.25s;
+}
+
+.languageSelector .dropDownItem.active{
+	background-color: var(--color-white);
+	color: var(--color-main);
+}
+.languageSelector .dropDownItem:hover{
+	background-color: var(--color-white);
+	color: var(--color-main);
+}

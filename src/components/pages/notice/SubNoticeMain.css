@@ -1,0 +1,146 @@
+.noticeMain{
+    width: 1090px;
+}
+.searchWrap{
+    width: 1088px;
+    height: 144px;
+    border: 1px solid #ccc;
+}
+.noticeListN{
+    padding-bottom: 23px;
+    font-weight: 500;
+}
+.noticeListN span{
+    font-weight: 700;
+    color: var(--color-main);
+}
+.noticeMain ul{
+    padding: 18px 25px;
+    justify-content: space-between;
+}
+
+/* notice list */
+.noticeListT{
+    border-top: 2px solid #686868;
+    border-bottom: 2px solid #686868;
+    text-align: center;
+    font-weight: 700;
+    display: flex;
+}
+.noticeListM{
+    border-bottom: 1px solid var(--txt-border-color);
+    font-size: var(--txt-font-size);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.noticeListM:hover{
+    transition: 0.2s;
+    background-color: var(--color-white);
+}
+.noticeListM>li:not(.notiTitle){
+    text-align: center;
+}
+.notiNumber{
+    width: 30px;
+}
+.notiTitle{
+    width: 600px;
+}
+.notiTitTxt{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.notiWriter{
+    width: 50px;
+}
+.notiDate{
+    width: 90px;
+}
+.notiView{
+    width: 50px;
+}
+.notiArrow{
+    display: none;
+}
+
+
+@media screen and (max-width: 1439px) {
+    .noticeMain{
+        width: 100%;
+    }
+    .searchWrap{
+        width: 100%;
+    }
+    .noticeMain ul{
+        padding: 15px;
+    }
+    .noticeListN{
+        padding: 30px 0;
+    }
+    .noticeListT{
+        font-size: 15px;
+    }
+    .notiNumber{
+        width: 5%;
+    }
+    .notiTitle{
+        width: 60%;
+    }
+    .notiWriter{
+        width: 10%;
+    }
+    .notiDate{
+        width: 10%;
+    }
+    .notiView{
+        width: 10%;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .noticeListN{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .noticeListT{
+        display: none;
+    }
+    .noticeListM{
+        flex-direction: column;
+        align-items: start;
+    }
+    .noticeListM>li:not(.notiTitle){
+        text-align: left;
+    }
+    .notiNumber{
+        display: none;
+    }
+    .notiTitle{
+        width: 100%;
+        order: 2;
+    }
+    .notiTitle>a{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .notiWriter{
+        display: none;
+    }
+    .notiDate{
+        width: 100%;
+        order: 1;
+        font-size: calc(100vw * (10/400));
+    }
+    .notiView{
+        display: none;
+    }
+    .notiArrow{
+        display: block;
+        width: calc(100vw * (20/400));
+    }
+}

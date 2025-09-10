@@ -1,0 +1,104 @@
+.SubIntroMainSec4_wrap{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+/* 인트로메인섹션 제목-start */
+.SubIntroMainSec4_wrap>h1{
+    font-family: 'BookkBold';
+    font-size: 64px;
+    padding-top: 70px;
+    font-weight: 400;
+    @media screen and (max-width:1439px) {
+		padding-top: 30px;
+	}
+	@media screen and (max-width:1023px) {
+		font-size: calc( 100vw * ( 32 / 400));
+   	 	padding-top: calc( 100vw * ( 50 / 400));
+	}
+}
+.SubIntroMainSec4_bar>div:first-child{
+	width: 1px;
+    height: 60px;
+    background-color: var(--color-main);
+    margin:0 auto;
+    @media screen and (max-width:1439px) {
+		height: 50px;
+	}
+	@media screen and (max-width:1023px) {
+		height: calc( 100vw * ( 32 / 400));
+	}
+}
+.SubIntroMainSec4_bar>div:last-child{
+    width: 7px;
+    height: 7px;
+    border-radius: 7px;
+    background-color: var(--color-main);
+    margin: 0 auto;
+}
+.SubIntroMainSec4_wrap>h2{
+    font-family: 'BookkThin';
+    font-size: 40px;
+    padding-top: 20px;
+    padding-bottom: 70px;
+    font-weight: 400;
+    @media screen and (max-width:1439px) {
+		font-size: 36px;
+	}
+	@media screen and (max-width:1023px) {
+		font-size: calc( 100vw * ( 20 / 400));
+   	 	padding-top: calc( 100vw * ( 10 / 400));
+   	 	padding-bottom: calc( 100vw * ( 30 / 400));
+	}
+}
+/* 인트로메인섹션 제목-end */
+.SubIntroMainSec4_stroll{
+    padding-top: 70px;
+	display: flex;
+	flex-direction: column;
+}
+.SubIntroMainSec4_stroll>div{
+    /* width: 100%; */
+    height: 60px;
+    display: flex;
+	align-items: center;
+    background-color: #EAD6B3;
+    border-radius: 10px;
+	@media screen and (max-width:1023px) {
+		height: calc( 100vw * ( 24 / 400));
+	}
+}
+.SubIntroMainSec4_stroll>div>p{
+    font-size: 20px;
+    text-align: start;
+    font-family: 'BookkBold';
+    font-weight: 400px;
+	@media screen and (max-width:1023px) {
+		font-size: calc( 100vw * ( 10 / 400));
+	}
+
+}
+.SubIntroMainSec4_stroll>div>p:first-child{
+    flex: 0.35;
+    padding-left: 20px;
+	@media screen and (max-width:1023px) {
+		padding-left: calc( 100vw * ( 20 / 400));
+	}
+}
+.SubIntroMainSec4_stroll>div>p:last-child{
+    flex: 0.65;
+}
+.SubIntroMainSec4_stroll>div:nth-child(2),.SubIntroMainSec4_stroll>div:nth-child(4){
+    background-color: #ffffff;
+}
+
+.SubIntroMainSec4_wrap .jido {
+	width: 100%;
+	aspect-ratio: 950/793;
+	font-size: 0;
+}
+
+.SubIntroMainSec4_wrap .jido>img {
+	width: 100%;
+	height: 100%;
+}

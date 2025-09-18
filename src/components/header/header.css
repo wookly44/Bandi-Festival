@@ -1,70 +1,41 @@
-.headerDummy {
-	position: relative;
-	width: 100%;
-	height: var(--header-height);
-	background-color: var(--color-main);
-}
-
+/* 헤더 메인 컨테이너 */
 header {
 	position: fixed;
-	top:0;
+	top: 0;
 	left: 0;
 	width: 100%;
 	height: var(--header-height);
 	background-color: var(--color-main);
-	z-index: 32768;
+	z-index: 99;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: var(--header-padding);
-	transition: transform 0.25s;
+	transition: transform 0.25s ease;
 }
 
-header.hidden.alter {
-	transform: translateY(-100%);
-}
-
-.headerLogo {
-	font-size:0;
-}
-
-.headerLogo>img {
-	width:144px;
+/* 헤더 로고 스타일 */
+.headerLogo > img {
+	width: 144px;
 	height: auto;
-	@media screen and (max-width:1439px) {
-		width: 128px;
-	}
-	@media screen and (max-width:1023px) {
-		width: calc(100vw * (80 / 400));
-	}
 }
 
+/* 헤더 네비게이션 */
 .headerMiddleNav {
-	flex: 1;
 	display: flex;
-	justify-content: center;
 	gap: 60px;
-	@media screen and (max-width:1439px) {
-		gap: 30px;
-	}
-	@media screen and (max-width:1023px) {
-		display: none;
-	}
 }
 
+/* 네비게이션 아이템 기본 스타일 */
 .headerMiddleNav .navItem {
-	/* font-weight: bold; */
 	color: var(--color-white);
-	transition: 0.25s;
+	transition: color 0.25s ease;
 	width: 130px;
 	text-align: center;
 }
 
-.headerMiddleNav .navItem:hover {
-	/* font-weight: bold; */
-	color: var(--color-sub);
-}
-
+/* 네비게이션 아이템 호버 및 활성 상태 */
+.headerMiddleNav .navItem:hover,
 .headerMiddleNav .navItem.active {
 	color: var(--color-sub);
 }
@@ -73,85 +44,73 @@ header.hidden.alter {
 	filter: drop-shadow(0 0 2px var(--color-sub));
 }
 
-.headerContext {
-	width: 144px;
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: space-between;
-	align-items: center;
-	@media screen and (max-width:1439px) {
-		width: 128px;
-	}
-	@media screen and (max-width:1023px) {
-		width: calc(100vw * (40 / 400));
-		height: calc(100vw * (40 / 400));
-	}
-}
-
-.languageSelector {
-	color: var(--color-white);
-	font-weight: bold;
-	position: relative;
-	@media screen and (max-width:1023px) {
-		display: none;
-	}
-}
-
-.languageSelector .contentAndArrow {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	cursor: pointer;
-	user-select: none;
-	height: 100%;
-	padding: 16px 8px;
-}
-
-.languageSelector .arrow {
-	width: 16px;
-	aspect-ratio: 1;
-	background-image: url('/bandifesta/assets/arrowWhite.png');
-	background-size: 100%;
-	transform: rotate(90deg);
-	transition: 0.25s;
-}
-
-.languageSelector .content {
-	height: 100%;
-}
-
-.languageSelector .arrow.active {
-	transform: rotate(-90deg);
-}
-
-.languageSelector .dropDown {
-	background-color: var(--color-main);
-	z-index: 8192;
-	position: absolute;
-	top: 100%;
-	right: 0;
+/* 서브메뉴 컨테이너 */
+.subMenu {
+	position: fixed;
+	top: var(--header-height);
+	left: 0;
 	width: 100%;
+	padding: 45px 0;
+	background-color: rgba(3, 5, 17, 0.95);
+	display: flex;
+	justify-content: center;
+	gap: 60px;
+	transition: transform 0.25s ease;
+	z-index: 98;
+}
+
+/* 서브메뉴 숨김 상태 */
+.subMenu.hidden {
+	transform: translateY(-100%);
+}
+
+/* 서브메뉴 아이템 컨테이너 */
+.subMenuContainer {
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
-	/* height: 0; */
-}
-
-.languageSelector .dropDownItem{
-	user-select: none;
-	display: flex;
 	align-items: center;
-	justify-content: center;
-	font-weight: initial;
-	padding: 4px 16px;
-	transition: 0.25s;
+	gap: 30px;
 }
 
-.languageSelector .dropDownItem.active{
-	background-color: var(--color-white);
-	color: var(--color-main);
+/* 서브메뉴 아이템 스타일 */
+.subMenuItem.fontSubTitle {
+	color: var(--color-white);
+	width: 130px;
+	text-align: center;
+	transition: color 0.25s ease;
 }
-.languageSelector .dropDownItem:hover{
-	background-color: var(--color-white);
-	color: var(--color-main);
+
+.subMenuItem.fontSubTitle:hover {
+	color: var(--color-sub);
+}
+
+/* 1439px 이하 미디어쿼리 - 중간 크기 화면 대응 */
+@media screen and (max-width: 1439px) {
+	.headerLogo > img {
+		width: 128px;
+	}
+	
+	.headerMiddleNav {
+		gap: 30px;
+	}
+	
+	.subMenu {
+		gap: 30px;
+	}
+	
+	.subMenuContainer {
+		gap: 24px;
+	}
+}
+
+/* 1023px 이하 미디어쿼리 - 모바일 화면 대응 */
+@media screen and (max-width: 1023px) {
+	.headerLogo > img {
+		width: calc(100vw * (80 / 400));
+	}
+	
+	.headerMiddleNav,
+	.subMenu {
+		display: none;
+	}
 }

@@ -1,0 +1,64 @@
+name: Push Commit Full Summary
+
+on:
+  push:
+    branches:
+      - '**'  # 모든 브랜치에서 Push 시 실행
+
+jobs:
+  log-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 레포 체크아웃 (전체 커밋 기록)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2️⃣ 컬러 정의
+      - name: Define colors
+        run: |
+          RED="\033[0;31m"
+          GREEN="\033[0;32m"
+          BLUE="\033[0;34m"
+          YELLOW="\033[1;33m"
+          CYAN="\033[0;36m"
+          NC="\033[0m" # No Color
+          echo -e "${CYAN}ANSI colors ready${NC}"
+
+      # 3️⃣ 브랜치 정보 출력
+      - name: Branch info
+        run: |
+          echo -e "${BLUE}================ Branch Info ================${NC}"
+          echo -e "${GREEN}현재 브랜치:${NC} $GITHUB_REF"
+          git rev-parse --abbrev-ref HEAD
+          echo -e "${BLUE}===========================================${NC}"
+
+      # 4️⃣ 최근 10개 커밋 로그
+      - name: Last 10 commits
+        run: |
+          echo -e "${YELLOW}======= 최근 10개 커밋 로그 =======${NC}"
+          git log -10 --oneline --decorate --graph
+          echo -e "${YELLOW}==================================${NC}"
+
+      # 5️⃣ 최근 10개 커밋 파일 변경 내역
+      - name: Recent file changes
+        run: |
+          echo -e "${YELLOW}======= 최근 10개 커밋 파일 변경 =======${NC}"
+          git log -10 --name-status --pretty=format:"%h - %s"
+          echo -e "${YELLOW}========================================${NC}"
+
+      # 6️⃣ 최근 50개 커밋 메시지 통계
+      - name: Commit message statistics
+        run: |
+          echo -e "${YELLOW}======= 최근 50개 커밋 메시지 통계 =======${NC}"
+          git log -50 --pretty=format:"%s" | sort | uniq -c | sort -nr
+          echo -e "${YELLOW}==========================================${NC}"
+
+      # 7️⃣ 커밋 요약
+      - name: Commit summary
+        run: |
+          echo -e "${CYAN}======= 최근 10개 커밋 요약 =======${NC}"
+          git log -10 --pretty=format:"%h - %an: %s (%ad)" --date=short
+          echo -e "${CYAN}==================================${NC}"

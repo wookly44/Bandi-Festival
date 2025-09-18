@@ -17,7 +17,7 @@
 	font-family: 'BookkBold';
 	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
 	gap: 4px;
-	z-index: 18184175;
+	z-index: 1;
 	@media screen and (max-width:1023px) {
 		gap: calc(100vw * (2 / 400) );
 		width: calc(100vw * (64 / 400) );

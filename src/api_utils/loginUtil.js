@@ -1,165 +1,65 @@
-import axios from "axios";
-import QueryString from "qs";
-import Cookies from "universal-cookie";
+// 간단한 사용자 상태 관리
+let currentUser = null;
 
-axios.defaults.withCredentials = true;
+// 현재 로그인한 사용자 정보 가져오기
+export const getCurrentUser = () => currentUser;
 
-const cookies = new Cookies();
-const cookieConfig = {
-	sameSite:'none',
-	secure:true,
-	httpOnly:false
-}
-
-const login = async(body,thenCallback,catchCallback,finallyCallback)=>{
-	await axios.post(import.meta.env.VITE_REST_URL+'/kakao/login',QueryString.stringify({
-		...body
-	}),{
-		headers:{
-
+// 더미 로그인 (테스트용) - 콜백 함수들을 매개변수로 받도록 수정
+export const login = (data, onSuccess, onError) => {
+	try {
+		// 실제 API 호출 시뮬레이션을 위한 setTimeout 추가
+		setTimeout(() => {
+			currentUser = {
+				id: 'user123',
+				name: '홍길동',
+				email: 'test@example.com',
+				profileImage: '/bandifesta/assets/user1.png'
+			};
+			
+			// 성공 콜백 실행
+			if (onSuccess && typeof onSuccess === 'function') {
+				onSuccess(currentUser);
+			}
+		}, 500); // 0.5초 지연으로 실제 API 호출 시뮬레이션
+		
+	} catch (error) {
+		console.error('로그인 중 오류 발생:', error);
+		// 에러 콜백 실행
+		if (onError && typeof onError === 'function') {
+			onError(error);
 		}
-	})
-	.then(function (response) {
-		setCookie('access_token',response.data['access_token']);
-		setCookie('refresh_token',response.data['refresh_token']);
-		// 성공 핸들링
-		thenCallback(response);
-	})
-	.catch(function (error) {
-		// 에러 핸들링
-		if(catchCallback){catchCallback(error);}
-	})
-	.finally(function () {
-		// 항상 실행되는 영역
-		if(finallyCallback){finallyCallback();}
-	});
-}
+	}
+};
 
-const refreshToken = async(body,thenCallback,catchCallback,finallyCallback)=>{
-	await axios.post(import.meta.env.VITE_REST_URL+'/kakao/refreshToken',QueryString.stringify({
-		...body,
-		refresh_token:getCookie('refresh_token')||"0"
-	}),{
-		headers:{
-
+// 로그아웃 - App.jsx의 패턴에 맞춰 콜백 함수들을 매개변수로 받도록 수정
+export const logout = (data, onSuccess, onError, onComplete) => {
+	try {
+		// 실제 API 호출 시뮬레이션을 위한 setTimeout 추가
+		setTimeout(() => {
+			currentUser = null;
+			console.log('로그아웃 처리 완료');
+			
+			// 성공 콜백 실행
+			if (onSuccess && typeof onSuccess === 'function') {
+				onSuccess();
+			}
+			
+			// 완료 콜백 실행
+			if (onComplete && typeof onComplete === 'function') {
+				onComplete();
+			}
+		}, 300); // 0.3초 지연
+		
+	} catch (error) {
+		console.error('로그아웃 중 오류 발생:', error);
+		// 에러 콜백 실행 (에러가 발생해도 로그아웃 처리)
+		if (onError && typeof onError === 'function') {
+			onError(error);
 		}
-	})
-	.then(function (response) {
-		// console.log('토큰 리프레시');
-		setCookie('access_token',response.data['access_token']);
-		setCookie('refresh_token',response.data['refresh_token']);
-		// 성공 핸들링
-		thenCallback(response);
-	})
-	.catch(function (error) {
-		// 에러 핸들링
-		if(catchCallback){catchCallback(error);}
-	})
-	.finally(function () {
-		// 항상 실행되는 영역
-		if(finallyCallback){finallyCallback();}
-	});
-}
-
-const getKakaoUser = async(body,thenCallback,catchCallback,finallyCallback)=>{
-	await axios.post(import.meta.env.VITE_REST_URL+'/kakao/getKakaoUser',QueryString.stringify({
-		...body,
-		access_token:getCookie('access_token')||"0"
-	}),{
-		headers:{
-
+		
+		// 완료 콜백 실행
+		if (onComplete && typeof onComplete === 'function') {
+			onComplete();
 		}
-	})
-	.then(function (response) {
-		// 성공 핸들링
-		setCookie('user_id',response.data['id']);
-		thenCallback(response);
-	})
-	.catch(function (error) {
-		// 에러 핸들링
-		if(catchCallback){catchCallback(error);}
-	})
-	.finally(function () {
-		// 항상 실행되는 영역
-		if(finallyCallback){finallyCallback();}
-	});
-}
-
-const loginRequest = ()=>{
-	const authorizer = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_KAKAO_REST_KEY}&redirect_uri=${encodeURI(import.meta.env.VITE_REDIRECT_URL)}&response_type=code`;
-	window.location.href = authorizer;
-}
-
-const logout = async(body,thenCallback,catchCallback,finallyCallback)=>{
-	await axios.post(import.meta.env.VITE_REST_URL+'/kakao/logout',QueryString.stringify({
-		...body,
-		access_token:getCookie('access_token')
-	}),{
-		headers:{
-
-		}
-	})
-	.then(function (response) {
-		// 성공 핸들링
-		removeCookie('access_token')
-		removeCookie('refresh_token')
-		removeCookie('user_id')
-		thenCallback(response);
-	})
-	.catch(function (error) {
-		// 에러 핸들링
-		if(catchCallback){catchCallback(error);}
-	})
-	.finally(function () {
-		// 항상 실행되는 영역
-		if(finallyCallback){finallyCallback();}
-	});
-}
-
-const unlink = async(body,thenCallback,catchCallback,finallyCallback)=>{
-	await axios.post(import.meta.env.VITE_REST_URL+'/kakao/unlink',QueryString.stringify({
-		...body,
-		access_token:getCookie('access_token')
-	}),{
-		headers:{
-
-		}
-	})
-	.then(function (response) {
-		// 성공 핸들링
-		thenCallback(response);
-	})
-	.catch(function (error) {
-		// 에러 핸들링
-		if(catchCallback){catchCallback(error);}
-	})
-	.finally(function () {
-		// 항상 실행되는 영역
-		if(finallyCallback){finallyCallback();}
-	});
-}
-
-const setCookie = (fieldName,val)=>{
-	cookies.set(fieldName,val,cookieConfig);
-}
-
-const getCookie = (fieldName)=>{
-	return cookies.get(fieldName);
-}
-
-const removeCookie = (fieldName)=>{
-	cookies.remove(fieldName,cookieConfig)
-}
-
-export {
-	//REST
-	getKakaoUser,
-	loginRequest,
-	login,
-	logout,
-	unlink,
-	refreshToken,
-	//UTILS
-	getCookie,
-	setCookie,
-}
+	}
+};

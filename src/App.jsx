@@ -25,7 +25,7 @@ import PageAnswerWrite 		from './components/pages/details/PageAnswerWrite';
 import PageAnswerEdit 		from './components/pages/details/PageAnswerEdit';
 import PageFestivalDetail 	from './components/pages/details/PageFestivalDetail';
 import PageQNAEdit from './components/pages/details/PageQNAEdit';
-import { getKakaoUser, logout, unlink } from './api_utils/loginUtil';
+import { login, logout } from './api_utils/loginUtil';
 
 const configContext = createContext();
 
@@ -35,85 +35,70 @@ export const editContext = createContext();
 function App() {
 	//네비게이트
 	const navigate = useNavigate();
-	//전역설정
-	const [config,setConfig] = useState({
-		languages:[
-			'Kor',
-			'Eng',
-			'Jpn'
-		],
-		language:'Kor',
-		user:null,
-		festivalView:'gallery'
-	})
-	//전역설정 핸들러
+	
+	//전역설정 상태
+	const [config, setConfig] = useState({
+		user: null,
+		festivalView: 'gallery'
+	});
+
+	// 개선: 각 기능별로 함수를 분리해서 정의
+	
+	// 축제 보기 모드 변경 함수
+	const handleSetFestivalView = (val) => {
+		setConfig(prevConfig => ({
+			...prevConfig,
+			festivalView: val
+		}));
+	};
+
+	// 로그인 함수 - 더 간단하게 정리
+	const handleLogin = () => {
+		login({}, 
+			(user) => {
+				console.log('로그인 성공:', user);
+				setConfig(prevConfig => ({
+					...prevConfig,
+					user: user
+				}));
+			},
+			(error) => {
+				console.error('로그인 실패:', error);
+			}
+		);
+	};
+
+	// 로그아웃 함수 - 더 간단하게 정리
+	const handleLogout = () => {
+		logout(
+			{}, // 빈 데이터
+			(response) => {
+				// 성공 시 사용자 정보 삭제
+				setConfig(prevConfig => ({
+					...prevConfig,
+					user: null
+				}));
+			},
+			(error) => {
+				// 에러 시에도 사용자 정보 삭제 (안전장치)
+				setConfig(prevConfig => ({
+					...prevConfig,
+					user: null
+				}));
+			},
+			() => {
+				// 완료 후 메인페이지로 이동
+				navigate('/');
+			}
+		);
+	};
+
 	const handleConfig = {
-		setFestivalView:(val)=>{
-			setConfig({
-				...config,
-				festivalView:val
-			})
-		},
-		setLanguage:(value)=>{
-			setConfig({
-				...config,
-				language:value
-			})
-			navigate(`/festival/${config.festivalView}`);
-		},
-		getLanguageByIndex:(index)=>{
-			return config.languages[index]
-		},
-		setKakaoUser:(obj)=>{
-			setConfig({
-				...config,
-				user:obj
-			})
-		},
-		logout:()=>{
-			logout({
+		setFestivalView: handleSetFestivalView,
+		login: handleLogin,
+		logout: handleLogout
+	};
 
-			},(response)=>{
-				setConfig({
-					...config,
-					user:null
-				})
-			},(error)=>{
-				setConfig({
-					...config,
-					user:null
-				})
-			},()=>{
-				navigate('/')
-			})
-		},
-		unlink:()=>{
-			if (!confirm('카카오 계정 연결을 해제하시겠습니까?')) {return;}
-			unlink({
-
-			},(response)=>{
-				setConfig({
-					...config,
-					user:null
-				})
-			},(error)=>{
-				setConfig({
-					...config,
-					user:null
-				})
-			},()=>{
-				navigate('/')
-			})
-		}
-	}
-	//쿠키에서 유저세션확인
-	useEffect(()=>{
-		getKakaoUser({
-
-		},(response)=>{
-			handleConfig.setKakaoUser(response.data);
-		})
-	},[])
 	// notice 
 	const [state, dispatch] = useReducer(Reducer, Contents);
 	const {datas} = state;

@@ -5,7 +5,7 @@ import { isFestivalLiked } from '/src/api_utils/festivalUtil';
 import { likeFestival } from '/src/api_utils/festivalUtil';
 import { configContext } from '/src/App';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginRequest } from '../../../api_utils/loginUtil';
+import { login } from '../../../api_utils/loginUtil';
 
 function FestivalLikeButton({festivalId,userId,onChange}) {
 	const [pressed,setPressed] = useState(false);
@@ -30,7 +30,7 @@ function FestivalLikeButton({festivalId,userId,onChange}) {
 			//로그아웃 상태일 때 로그인 요청
 			if (config.language==='Kor') {
 				if (confirm('로그인이 필요한 서비스입니다. 카카오 계정으로 로그인하시겠습니까? ')) {
-					loginRequest();
+					login();
 				}
 			}
 			return;
